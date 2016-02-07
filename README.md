@@ -12,3 +12,4 @@ Dockers related to Graph Databases (Hadoop, HBase, Titan, etc.)
 
 ###Titan
 * [docker] https://github.com/phani1kumar/docker-titan
+* [docker] https://hub.docker.com/r/elubow/titan-gremlin/
