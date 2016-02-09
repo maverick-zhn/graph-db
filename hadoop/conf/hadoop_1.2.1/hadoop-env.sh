@@ -9,7 +9,7 @@ export HADOOP_PREFIX=/opt/hadoop
 
 # The java implementation to use.  Required.
 
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64
 
 # Extra Java CLASSPATH elements.  Optional.
 # export HADOOP_CLASSPATH="<extra_entries>:$HADOOP_CLASSPATH"
