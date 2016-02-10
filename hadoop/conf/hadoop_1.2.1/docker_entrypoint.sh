@@ -2,10 +2,10 @@
 
 service ssh start
 
+/opt/hadoop/bin/hadoop namenode -format
+
 # start process hadoop
 /opt/hadoop/bin/start-all.sh
-jps
-
 /opt/hbase/bin/start-hbase.sh
 jps
 
