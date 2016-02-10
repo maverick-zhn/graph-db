@@ -21,8 +21,9 @@ ENV HBASE_PREFIX  /opt/hbase
 # Install all dependencies 
 RUN apt-get update && apt-get install -y wget ssh rsync openjdk-6-jdk 
 
-# Config JAVA
+# Environment variables
 ENV JAVA_HOME /usr/lib/jvm/java-6-openjdk-amd64
+ENV PATH $PATH:$HADOOP_PREFIX/bin
 
 # Download hadoop
 RUN wget -O /tmp/hadoop-${HADOOP_VERSION}.tar.gz http://mirrors.sonic.net/apache/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
@@ -31,7 +32,7 @@ RUN wget -O /tmp/hadoop-${HADOOP_VERSION}.tar.gz http://mirrors.sonic.net/apache
 RUN wget -O /tmp/hbase-${HBASE_VERSION}.tar.gz https://archive.apache.org/dist/hbase/hbase-0.98.2/hbase-0.98.2-hadoop1-bin.tar.gz
 
 # Install hadoop 
-RUN tar -C /opt -xf /tmp/hadoop-${HADOOP_VERSION}.tar.gz \ 
+RUN tar -C /opt -xf /tmp/hadoop-${HADOOP_VERSION}.tar.gz  \ 
   && ln -s /opt/hadoop-${HADOOP_VERSION} ${HADOOP_PREFIX} \ 
   && mkdir /var/lib/hadoop
 
@@ -48,22 +49,23 @@ RUN tar -C /opt -xf /tmp/hbase-${HBASE_VERSION}.tar.gz \
 COPY conf/hadoop_${HADOOP_VERSION}/ssh_config /root/.ssh/config
 
 # Copy Hadoop config files 
-COPY conf/hadoop_${HADOOP_VERSION}/hadoop-env.sh   ${HADOOP_PREFIX}/conf/ 
 COPY conf/hadoop_${HADOOP_VERSION}/core-site.xml   ${HADOOP_PREFIX}/conf/ 
 COPY conf/hadoop_${HADOOP_VERSION}/hdfs-site.xml   ${HADOOP_PREFIX}/conf/ 
 COPY conf/hadoop_${HADOOP_VERSION}/mapred-site.xml ${HADOOP_PREFIX}/conf/ 
+
+# Setup JAVA_HOME, HADOOP_PREFIX
+RUN sed -i "s|^# export JAVA_HOME.*$|export JAVA_HOME=${JAVA_HOME}\nexport HADOOP_PREFIX=${HADOOP_PREFIX}\n|" $HADOOP_PREFIX/conf/hadoop-env.sh
+
+# Format hdfs 
+RUN ${HADOOP_PREFIX}/bin/hadoop namenode -format
 
 # Copy Hbase config files
 COPY conf/hbase_${HBASE_VERSION}/hbase-env.sh   ${HBASE_PREFIX}/conf/ 
 COPY conf/hbase_${HBASE_VERSION}/hbase-site.xml ${HBASE_PREFIX}/conf/ 
 
-
-# Format hdfs 
-RUN ${HADOOP_PREFIX}/bin/hadoop namenode -format
-
 # Copy the entry point shell 
 COPY conf/hadoop_${HADOOP_VERSION}/docker_entrypoint.sh /root/ 
-RUN  chmod a+x /root/docker_entrypoint.sh
+RUN  chmod 700 /root/docker_entrypoint.sh
 
 # Clean 
 RUN rm -r /var/cache/apt /var/lib/apt/lists /tmp/hadoop-${HADOOP_VERSION}.tar* /tmp/hbase-${HBASE_VERSION}.tar*
@@ -105,4 +107,4 @@ EXPOSE 8485 8480 848
 VOLUME [ "${HADOOP_PREFIX}/logs", "${HBASE_PREFIX}/logs" ]
 
 ### Entrypoint
-ENTRYPOINT [ "/root/docker_entrypoint.sh" ]
+#ENTRYPOINT [ "/root/docker_entrypoint.sh" ]
