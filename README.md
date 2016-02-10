@@ -16,8 +16,8 @@ Dockers related to Graph Databases (Hadoop, HBase, Titan, etc.)
 
 ###TO-DO LIST
 * [Please check data-only directory]~~Check how to persist data when a container is close, and also accross different cointaner.~~
-* Check https://docs.docker.com/engine/userguide/containers/dockervolumes/
-* Check http://stackoverflow.com/questions/18496940/how-to-deal-with-persistent-storage-e-g-databases-in-docker
+* ~~Check https://docs.docker.com/engine/userguide/containers/dockervolumes/~~
+* ~~Check http://stackoverflow.com/questions/18496940/how-to-deal-with-persistent-storage-e-g-databases-in-docker~~
 * Separate Hadoop and HBase in two containers.
 * Create TitanDb and SOlr containers.
 
