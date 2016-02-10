@@ -43,7 +43,8 @@ root@f0ee9fe79e9f:/data#
 
 Then run
 
-```root@f0ee9fe79e9f:/data# ls
+```
+root@f0ee9fe79e9f:/data# ls
 fromcontainer
 root@f0ee9fe79e9f:/data#
 ```
