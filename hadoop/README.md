@@ -11,3 +11,10 @@
 Then
 
 `$/root/docker_entrypoint.sh`
+
+
+###Notes
+* It creates the image but it does not assign tag
+I ran:
+`docker tag b3aae2484b09 maverickzhn/hadoop:latest`
+
