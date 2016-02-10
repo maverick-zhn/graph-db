@@ -3,18 +3,6 @@
 
 <configuration>
 
-<!--
-  <property>
-    <name>dfs.name.dir</name>
-    <value>/home/hadoop/hadoop-stack/hdfs/name</value>
-  </property>
-
-  <property>
-    <name>dfs.data.dir</name>
-    <value>/home/hadoop/hadoop-stack/hdfs/data</value>
-  </property>
--->
-
   <property>
     <name>dfs.replication</name>
     <value>1</value>

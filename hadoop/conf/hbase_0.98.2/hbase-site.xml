@@ -38,17 +38,4 @@
     <value>localhost</value>
   </property>
 
-
-  <!--
-  <property>
-    <name>hbase.rootdir</name>
-    <value>file:///home/hadoop/hadoop-stack/hbase</value>
-  </property>
-
-  <property>
-    <name>hbase.zookeeper.property.dataDir</name>
-    <value>/home/hadoop/hadoop-stack/zookeeper</value>
-  </property>
-  -->
-
 </configuration>
