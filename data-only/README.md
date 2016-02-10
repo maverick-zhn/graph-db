@@ -13,10 +13,10 @@ VOLUME /data
 ```
 
 ####Build
-docker build -t data .
+`docker build -t data .`
 
 ####Run
-docker run --name hadoop-data data true
+`docker run --name hadoop-data data true`
 
 Notes:
 * Erasing image `docker rmi -f 3e7763a97796`
@@ -40,9 +40,12 @@ root@f0ee9fe79e9f:/data#
 
 ####Running hadoop docker with volumes
 `docker run --volumes-from hadoop-data --entrypoint /bin/bash -it maverickzhn/hadoop`
+
 Then run
+
 ```root@f0ee9fe79e9f:/data# ls
 fromcontainer
-root@f0ee9fe79e9f:/data# ```
+root@f0ee9fe79e9f:/data#
+```
 
 "fromcontainer" file is hosted in a volume in the host OS.
