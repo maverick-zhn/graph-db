@@ -78,6 +78,5 @@ root@ubuntu:/home/hduser/Desktop/repos/graph-db-dockers/data-only#
 ```
 
 ####Notes
-Notes:
 * Erasing image `docker rmi -f 3e7763a97796`
 * Rename image `docker tag d583c3ac45fd myname/server:latest`
