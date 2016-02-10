@@ -1,5 +1,6 @@
 # Hadoop 1.x + HBase 
 # Based on https://github.com/angelcervera/docker-hadoop
+# Setup according to: (single node setup) https://hadoop.apache.org/docs/r1.2.1/single_node_setup.html
 FROM ubuntu:14.04
 
 # Authors
@@ -40,7 +41,7 @@ RUN ssh-keygen -q -t dsa -P '' -f /root/.ssh/id_dsa \
 
 # Install hbase
 RUN tar -C /opt -xf /tmp/hbase-${HBASE_VERSION}.tar.gz \ 
-  && ln -s /opt/hadoop-${HBASE_VERSION} ${HBASE_PREFIX} 
+  && ln -s /opt/hbase-${HBASE_VERSION}-hadoop1 ${HBASE_PREFIX} 
 
 
 # Config ssh to accept all connections from unknow hosts. 
@@ -65,9 +66,10 @@ COPY conf/hadoop_${HADOOP_VERSION}/docker_entrypoint.sh /root/
 RUN  chmod a+x /root/docker_entrypoint.sh
 
 # Clean 
-RUN rm -r /var/cache/apt /var/lib/apt/lists /tmp/hadoop-${HADOOP_VERSION}.tar*
+RUN rm -r /var/cache/apt /var/lib/apt/lists /tmp/hadoop-${HADOOP_VERSION}.tar* /tmp/hbase-${HBASE_VERSION}.tar*
 
-# Expose ports
+
+### Expose ports
 
 # Zookeeper 
 EXPOSE 2181 
@@ -96,3 +98,11 @@ EXPOSE 50100 50105
 # Journal node (dfs.journalnode.rpc-address / dfs.journalnode.http-address / dfs.journalnode.https-address ) 
 EXPOSE 8485 8480 848
 
+
+### Expose volumes
+
+# logs
+VOLUME [ "${HADOOP_PREFIX}/logs", "${HBASE_PREFIX}/logs" ]
+
+### Entrypoint
+ENTRYPOINT [ "/root/docker_entrypoint.sh" ]
