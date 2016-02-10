@@ -1,4 +1,6 @@
 ###Advanced Docker Volumes
+ 
+ A volume can be a directory that is located outside of the root filesystem of your container. This allows you to import this directory in other containers. You can also use volumes to mount directories from your host machine inside a container. 
 
 ####Dockerfile example
 ```
@@ -50,3 +52,10 @@ root@f0ee9fe79e9f:/data#
 ```
 
 "fromcontainer" file is hosted in a volume in the host OS.
+
+
+####Persistent Storage in Docker
+* https://stackoverflow.com/questions/18496940/how-to-deal-with-persistent-storage-e-g-databases-in-docker
+* http://www.offermann.us/2013/12/tiny-docker-pieces-loosely-joined.html
+* http://crosbymichael.com/advanced-docker-volumes.html
+* http://container42.com/2013/12/16/persistent-volumes-with-docker-container-as-volume-pattern/
