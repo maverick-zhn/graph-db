@@ -8,7 +8,10 @@ You can pull the image instead of creating one
 docker pull maverickzhn/data
 ```
 
-####Dockerfile example
+####data-only Dockerfile example
+
+The following creates a volume that can be used for other containers. At the end you can see how data persists accross multiple runs of containers.
+
 ```
 FROM stackbrew/busybox:latest
 MAINTAINER ebarsall@purdue.edu servio@palacios.com
