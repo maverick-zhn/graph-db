@@ -20,6 +20,9 @@ Dockers related to Graph Databases (Hadoop, HBase, Titan, etc.)
 * [docker] https://hub.docker.com/r/elubow/titan-gremlin/
 * http://s3.thinkaurelius.com/docs/titan/0.5.4/gremlin.html
 * http://gremlindocs.spmallette.documentup.com/
+* https://github.com/thinkaurelius/titan/blob/titan09/titan-core/src/main/java/com/thinkaurelius/titan/example/GraphOfTheGodsFactory.java
+* http://s3.thinkaurelius.com/docs/titan/1.0.0/configuration.html
+* https://www.youtube.com/watch?v=ZkAYA4Kd8JE
 
 ###Graph DB additional info
 * http://markorodriguez.com/
