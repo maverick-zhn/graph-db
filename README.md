@@ -18,6 +18,13 @@ Dockers related to Graph Databases (Hadoop, HBase, Titan, etc.)
 ###Titan
 * [docker] https://github.com/phani1kumar/docker-titan
 * [docker] https://hub.docker.com/r/elubow/titan-gremlin/
+* http://s3.thinkaurelius.com/docs/titan/0.5.4/gremlin.html
+* http://gremlindocs.spmallette.documentup.com/
+
+###Graph DB additional info
+* http://markorodriguez.com/
+* http://www.datastax.com/dev/blog/the-benefits-of-the-gremlin-graph-traversal-machine
+* https://tinkerpop.incubator.apache.org/ 
 
 ###TO-DO LIST
 * [Please check data-only directory]~~Check how to persist data when a container is close, and also accross different cointaner.~~
