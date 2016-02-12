@@ -3,6 +3,11 @@ Dockers related to Graph Databases (Hadoop, HBase, Titan, etc.)
 
 ###Docker related
 * https://docs.docker.com/engine/reference/builder/
+* http://crosbymichael.com/dockerfile-best-practices.html
+* https://docs.docker.com/engine/userguide/containers/dockervolumes/
+
+###Docker Repositories
+* [Servio Palacios] https://hub.docker.com/r/maverickzhn/data/
 
 ###Hadoop
 * https://hadoop.apache.org/docs/r2.7.2/hadoop-yarn/hadoop-yarn-site/DockerContainerExecutor.html
