@@ -1,5 +1,6 @@
 
 # setting another java version as default version
+```
 maverick@ubuntu:/usr/lib/jvm$ sudo cp .java-1.6.0-openjdk-amd64.jinfo .java-6-openjdk-amd64.jinfo
 maverick@ubuntu:/usr/lib/jvm$ sudo update-java-alternatives -s java-6-openjdk-amd64
 update-alternatives: error: no alternatives for mozilla-javaplugin.so
@@ -8,26 +9,33 @@ maverick@ubuntu:/usr/lib/jvm$ java -version
 java version "1.6.0_38"
 OpenJDK Runtime Environment (IcedTea6 1.13.10) (6b38-1.13.10-0ubuntu0.14.04.1)
 OpenJDK 64-Bit Server VM (build 23.25-b01, mixed mode)
+```
 
 #ssh configuration, password less
+```
 ssh-keygen -t rsa -P ""
 cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
-
+```
 
 #hadoop 1.2.1
+```
 wget -O /tmp/hadoop-${HADOOP_VERSION}.tar.gz http://mirrors.sonic.net/apache/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
-
-
+```
+```
 maverick@ubuntu:~$ mv hadoop-1.2.1 hadoop
 maverick@ubuntu:~$ sudo cp -rf hadoop /usr/local/.
+```
 
-
+```
 maverick@ubuntu:/usr/local/hadoop/conf$ vi hadoop-env.sh 
 maverick@ubuntu:/usr/local/hadoop/conf$ sudo mkdir -p /app/hadoop/tmp
 sudo chown maverick:maverick /app/hadoop/tmp
+```
+
 
 #conf/core-site.xml
 
+```
 <configuration>
 <property>
   <name>hadoop.tmp.dir</name>
@@ -45,9 +53,10 @@ sudo chown maverick:maverick /app/hadoop/tmp
   determine the host, port, etc. for a filesystem.</description>
 </property>
 </configuration>
-
+```
 
 #mapred-site.xml
+```
 maverick@ubuntu:/usr/local/hadoop/conf$ vi mapred-site.xml 
 
 <property>
@@ -58,8 +67,10 @@ maverick@ubuntu:/usr/local/hadoop/conf$ vi mapred-site.xml
   and reduce task.
   </description>
 </property>
+```
 
 #conf/hdfs-site.xml
+```
 maverick@ubuntu:/usr/local/hadoop/conf$ vi hdfs-site.xml
 
 maverick@ubuntu:/usr/local/hadoop/conf$ /usr/local/hadoop/bin/hadoop namenode -format
@@ -121,17 +132,20 @@ tcp6       0      0 :::58873                :::*                    LISTEN
 tcp6       0      0 :::50010                :::*                    LISTEN     
 tcp6       0      0 :::50075                :::*                    LISTEN     
 tcp6       0      0 :::58619                :::*                    LISTEN     
+```
 
 #stopping 
-
+```
 maverick@ubuntu:/usr/local/hadoop/conf$ /usr/local/hadoop/bin/stop-all.sh
 stopping jobtracker
 localhost: stopping tasktracker
 stopping namenode
 localhost: stopping datanode
 localhost: stopping secondarynamenode
+```
 
 #testing wordcount on hadoop
+```
 maverick@ubuntu:/usr/local/hadoop$ bin/hadoop dfs -copyFromLocal /home/maverick/wordcount /user/maverick/wordcount
 maverick@ubuntu:/usr/local/hadoop$ bin/hadoop jar hadoop*examples*.jar wordcount /user/maverick/wordcount /user/maverick/wordcount-output
 
@@ -145,14 +159,18 @@ Found 3 items
 -rw-r--r--   1 maverick supergroup          0 2016-02-14 21:05 /user/maverick/wordcount-output/_SUCCESS
 drwxr-xr-x   - maverick supergroup          0 2016-02-14 21:04 /user/maverick/wordcount-output/_logs
 -rw-r--r--   1 maverick supergroup     258444 2016-02-14 21:05 /user/maverick/wordcount-output/part-r-00000
+```
 
 # increasing number of tasks
+```
 hduser@ubuntu:/usr/local/hadoop$ bin/hadoop jar hadoop*examples*.jar wordcount -D mapred.reduce.tasks=16 /user/hduser/gutenberg /user/hduser/gutenberg-output
-
+```
 # output
+```
 bin/hadoop dfs -cat /user/maverick/wordcount-output/part-r-00000
+```
 
-
+###TODO
 
 
 
