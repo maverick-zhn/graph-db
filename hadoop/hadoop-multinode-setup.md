@@ -171,6 +171,13 @@ bin/hadoop dfs -cat /user/maverick/wordcount-output/part-r-00000
 ```
 
 ###TODO
-
+* ~~Configure a Single-Node Cluster~~
+* ~~Clone Virtual Machine~~
+* ~~Backup Virtual Machine~~
+* ~~Test SSH users and access on those two virtual machines~~
+* Prepare new files for Multinode Installation
+* Edit Hadoop Configuration Files
+* Define Master and Slave
+* Pending Tasks ...
 
 
