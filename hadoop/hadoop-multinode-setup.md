@@ -180,4 +180,6 @@ bin/hadoop dfs -cat /user/maverick/wordcount-output/part-r-00000
 * Define Master and Slave
 * Pending Tasks ...
 
-
+###References
+* http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/
+* http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/
