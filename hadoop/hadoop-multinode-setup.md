@@ -1,5 +1,5 @@
 
-# setting another java version as default version
+# Changing default java version
 ```
 maverick@ubuntu:/usr/lib/jvm$ sudo cp .java-1.6.0-openjdk-amd64.jinfo .java-6-openjdk-amd64.jinfo
 maverick@ubuntu:/usr/lib/jvm$ sudo update-java-alternatives -s java-6-openjdk-amd64
@@ -17,7 +17,7 @@ ssh-keygen -t rsa -P ""
 cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
 ```
 
-#hadoop 1.2.1
+#Hadoop 1.2.1
 ```
 wget -O /tmp/hadoop-${HADOOP_VERSION}.tar.gz http://mirrors.sonic.net/apache/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
 ```
@@ -72,7 +72,10 @@ maverick@ubuntu:/usr/local/hadoop/conf$ vi mapred-site.xml
 #conf/hdfs-site.xml
 ```
 maverick@ubuntu:/usr/local/hadoop/conf$ vi hdfs-site.xml
+```
 
+###Formating HDFS
+```
 maverick@ubuntu:/usr/local/hadoop/conf$ /usr/local/hadoop/bin/hadoop namenode -format
 16/02/14 20:48:29 INFO namenode.NameNode: STARTUP_MSG: 
 /************************************************************
@@ -103,15 +106,20 @@ STARTUP_MSG:   java = 1.6.0_38
 /************************************************************
 SHUTDOWN_MSG: Shutting down NameNode at ubuntu/127.0.1.1
 ************************************************************/
+```
 
 #starting the single-node cluster
+```
 maverick@ubuntu:/usr/local/hadoop/conf$ /usr/local/hadoop/bin/start-all.sh
 starting namenode, logging to /usr/local/hadoop/libexec/../logs/hadoop-maverick-namenode-ubuntu.out
 localhost: starting datanode, logging to /usr/local/hadoop/libexec/../logs/hadoop-maverick-datanode-ubuntu.out
 localhost: starting secondarynamenode, logging to /usr/local/hadoop/libexec/../logs/hadoop-maverick-secondarynamenode-ubuntu.out
 starting jobtracker, logging to /usr/local/hadoop/libexec/../logs/hadoop-maverick-jobtracker-ubuntu.out
 localhost: starting tasktracker, logging to /usr/local/hadoop/libexec/../logs/hadoop-maverick-tasktracker-ubuntu.out
+```
 
+#Checking open ports
+```
 maverick@ubuntu:/usr/local/hadoop/conf$ netstat -an | grep 'LISTEN*'
 tcp        0      0 127.0.1.1:53            0.0.0.0:*               LISTEN     
 tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
@@ -134,7 +142,7 @@ tcp6       0      0 :::50075                :::*                    LISTEN
 tcp6       0      0 :::58619                :::*                    LISTEN     
 ```
 
-#stopping 
+#Stopping Hadoop
 ```
 maverick@ubuntu:/usr/local/hadoop/conf$ /usr/local/hadoop/bin/stop-all.sh
 stopping jobtracker
@@ -144,7 +152,7 @@ localhost: stopping datanode
 localhost: stopping secondarynamenode
 ```
 
-#testing wordcount on hadoop
+#Testing wordcount on hadoop
 ```
 maverick@ubuntu:/usr/local/hadoop$ bin/hadoop dfs -copyFromLocal /home/maverick/wordcount /user/maverick/wordcount
 maverick@ubuntu:/usr/local/hadoop$ bin/hadoop jar hadoop*examples*.jar wordcount /user/maverick/wordcount /user/maverick/wordcount-output
@@ -161,11 +169,11 @@ drwxr-xr-x   - maverick supergroup          0 2016-02-14 21:04 /user/maverick/wo
 -rw-r--r--   1 maverick supergroup     258444 2016-02-14 21:05 /user/maverick/wordcount-output/part-r-00000
 ```
 
-# increasing number of tasks
+#Increasing number of tasks
 ```
 hduser@ubuntu:/usr/local/hadoop$ bin/hadoop jar hadoop*examples*.jar wordcount -D mapred.reduce.tasks=16 /user/hduser/gutenberg /user/hduser/gutenberg-output
 ```
-# output
+#Output
 ```
 bin/hadoop dfs -cat /user/maverick/wordcount-output/part-r-00000
 ```
@@ -175,10 +183,22 @@ bin/hadoop dfs -cat /user/maverick/wordcount-output/part-r-00000
 * ~~Clone Virtual Machine~~
 * ~~Backup Virtual Machine~~
 * ~~Test SSH users and access on those two virtual machines~~
-* Prepare new files for Multinode Installation
-* Edit Hadoop Configuration Files
-* Define Master and Slave
-* Pending Tasks ...
+* ~~Prepare new files for Multinode Installation~~
+* ~~Edit Hadoop Configuration Files~~
+* ~~Define Master and Slave~~
+* ~~Configure Master, Name Node, Job Tracker~~
+* ~~Configure DataNodes and Task Managers [Slaves]~~
+* ~~Format HDSF on the cluster~~
+* ~~Check available space and logs~~
+* ~~Initiate hdfs and the Job tracker~~
+* ~~Verify Processes on Master and Slaves~~
+* ~~Run a MapReduce example on the Cluster~~
+* Install HBase
+* Configure HBase on top of Multinode Hadoop Cluster
+* Configure ZooKeeper options
+* Define HDFS Settings for HBase
+* Run HBase on top of multinode cluster
+* Document HBase and Hadoop in multi-node cluster
 
 ###References
 * http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/
