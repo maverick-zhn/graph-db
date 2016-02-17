@@ -1,52 +1,25 @@
-# Hadoop 1.x + HBase 
+# Apache Hadoop 1.x  
 # Based on https://github.com/angelcervera/docker-hadoop
 # Setup according to: (single node setup) https://hadoop.apache.org/docs/r1.2.1/single_node_setup.html
-FROM ubuntu:14.04
 
-# Authors
+FROM ebarsallo/hadoop:base
 MAINTAINER ebarsallo@purdue.edu servio@palacios.com
+ENV REFRESHED AT 2016-02-16
 
-# Every step in the build process will use this user
 USER root
-
-# Start folder
 WORKDIR /root
 
 # Environment variables
 ENV HADOOP_VERSION 1.2.1 
 ENV HADOOP_PREFIX /opt/hadoop
-ENV HBASE_VERSION 0.98.2
-ENV HBASE_PREFIX  /opt/hbase
-
-# Install all dependencies 
-RUN apt-get update && apt-get install -y wget ssh rsync openjdk-6-jdk 
-
-# Environment variables
-ENV JAVA_HOME /usr/lib/jvm/java-6-openjdk-amd64
 ENV PATH $PATH:$HADOOP_PREFIX/bin
 
 # Download hadoop
 RUN wget -O /tmp/hadoop-${HADOOP_VERSION}.tar.gz http://mirrors.sonic.net/apache/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
 
-# Download hbase
-RUN wget -O /tmp/hbase-${HBASE_VERSION}.tar.gz https://archive.apache.org/dist/hbase/hbase-0.98.2/hbase-0.98.2-hadoop1-bin.tar.gz
-
 # Install hadoop 
 RUN tar -C /opt -xf /tmp/hadoop-${HADOOP_VERSION}.tar.gz  \ 
-  && ln -s /opt/hadoop-${HADOOP_VERSION} ${HADOOP_PREFIX} \ 
-  && mkdir /var/lib/hadoop
-
-# Install ssh key 
-RUN ssh-keygen -q -t dsa -P '' -f /root/.ssh/id_dsa \ 
-  && cat /root/.ssh/id_dsa.pub >> /root/.ssh/authorized_keys 
-
-# Install hbase
-RUN tar -C /opt -xf /tmp/hbase-${HBASE_VERSION}.tar.gz \ 
-  && ln -s /opt/hbase-${HBASE_VERSION}-hadoop1 ${HBASE_PREFIX} 
-
-
-# Config ssh to accept all connections from unknow hosts. 
-COPY conf/hadoop_${HADOOP_VERSION}/ssh_config /root/.ssh/config
+  && ln -s /opt/hadoop-${HADOOP_VERSION} ${HADOOP_PREFIX} 
 
 # Copy Hadoop config files 
 COPY conf/hadoop_${HADOOP_VERSION}/core-site.xml   ${HADOOP_PREFIX}/conf/ 
@@ -59,17 +32,12 @@ RUN sed -i "s|^# export JAVA_HOME.*$|export JAVA_HOME=${JAVA_HOME}\nexport HADOO
 # Format hdfs 
 RUN ${HADOOP_PREFIX}/bin/hadoop namenode -format
 
-# Copy Hbase config files
-COPY conf/hbase_${HBASE_VERSION}/hbase-env.sh   ${HBASE_PREFIX}/conf/ 
-COPY conf/hbase_${HBASE_VERSION}/hbase-site.xml ${HBASE_PREFIX}/conf/ 
-
 # Copy the entry point shell 
 COPY conf/hadoop_${HADOOP_VERSION}/docker_entrypoint.sh /root/ 
 RUN  chmod 700 /root/docker_entrypoint.sh
 
 # Clean 
-RUN rm -r /var/cache/apt /var/lib/apt/lists /tmp/hadoop-${HADOOP_VERSION}.tar* /tmp/hbase-${HBASE_VERSION}.tar*
-
+RUN rm -r /var/cache/apt /var/lib/apt/lists /tmp/hadoop-${HADOOP_VERSION}.tar*
 
 ### Expose ports
 
@@ -80,7 +48,7 @@ EXPOSE 2181
 EXPOSE 9000 
 
 # FTP Filesystem impl. (fs.ftp.host.port) 
-EXPOSE 21 
+EXPOSE 21 22
 
 # NameNode Web UI: Web UI to look at current status of HDFS, explore file system ....... 
 EXPOSE 50070 50470 
@@ -104,7 +72,7 @@ EXPOSE 8485 8480 848
 ### Expose volumes
 
 # logs
-VOLUME [ "${HADOOP_PREFIX}/logs", "${HBASE_PREFIX}/logs" ]
+VOLUME [ "${HADOOP_PREFIX}/logs" ]
 
 ### Entrypoint
 #ENTRYPOINT [ "/root/docker_entrypoint.sh" ]
