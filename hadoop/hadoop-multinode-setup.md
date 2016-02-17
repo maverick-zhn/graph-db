@@ -203,3 +203,7 @@ bin/hadoop dfs -cat /user/maverick/wordcount-output/part-r-00000
 ###References
 * http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/
 * http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/
+
+###Hbase references:
+* https://www.cloudera.com/documentation/archive/cdh/4-x/4-2-2/CDH4-Installation-Guide/cdh4ig_topic_20_4.html#topic_20_4_1_unique_1
+* https://www.cloudera.com/documentation/archive/cdh/4-x/4-2-2/CDH4-Installation-Guide/cdh4ig_topic_20_5.html#topic_20_5
