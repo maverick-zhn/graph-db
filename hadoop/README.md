@@ -2,15 +2,15 @@
 
 ###Build
 
-`build -t hadoop .`
+`build -t ebarsallo/hadoop:1.2.1 .`
 
 ###Run
+`docker create -v /db-data --name hadoop-ds ubuntu:14.01 /bin/true`
+`docker run -d -P --volumes-from hadoop-ds -it -h hadoop-master -name hadoop-master ebarsallo/hadoop:1.2.1`
 
-`docker run --entrypoint /bin/bash -it hadoop`
+or
 
-Then
-
-`$/root/docker_entrypoint.sh`
+`docker run -d -P -v /db-data:/db-data -it -h hadoop-master -name hadoop-master ebarsallo/hadoop:1.2.1`
 
 
 ###Notes
@@ -18,3 +18,4 @@ Then
 I ran:
 `docker tag b3aae2484b09 maverickzhn/hadoop:latest`
 
+i
