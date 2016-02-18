@@ -1,4 +1,4 @@
-# graph-db-dockers
+# graph-db-dockers (on hold)
 Dockers related to Graph Databases (Hadoop, HBase, Titan, etc.)
 
 ###Docker related
@@ -35,6 +35,10 @@ Dockers related to Graph Databases (Hadoop, HBase, Titan, etc.)
 * ~~Check http://stackoverflow.com/questions/18496940/how-to-deal-with-persistent-storage-e-g-databases-in-docker~~
 * Separate Hadoop and HBase in two containers.
 * Create TitanDb and SOlr containers.
+
+###NOTES
+* Check: [kiwenlau](http://kiwenlau.blogspot.com/2015/05/quickly-build-arbitrary-size-hadoop.html), [alvinhenrick](https://github.com/alvinhenrick/hadoop-mutinode) docker implementations for hadoop multi nodes deploys on one machine.
+* Check: [Bluedata EPIC Lite](http://info.bluedata.com/EPIC_Lite_Download_Request.html), [Swarm Github](https://github.com/docker/swarm/), [Swarm](https://docs.docker.com/swarm/), [Docker Composer](https://docs.docker.com/compose/) for deploy cluster solutions on docker.
 
 ```
 We should use volumes to persist data after closing one container [see data-only directory]
