@@ -6,7 +6,7 @@ service ssh start
 
 # start process hadoop
 /opt/hadoop/bin/start-all.sh
-#/opt/hbase/bin/start-hbase.sh
+/opt/hbase/bin/start-hbase.sh
 jps
 
 
