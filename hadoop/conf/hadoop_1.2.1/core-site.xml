@@ -10,7 +10,7 @@
 
   <property>
     <name>hadoop.tmp.dir</name>
-    <value>/dbdata</value>
+    <value>/data</value>
   </property>
 
 
