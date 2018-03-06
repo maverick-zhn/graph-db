@@ -1,15 +1,15 @@
-###HBase Docker Documentation
+### HBase Docker Documentation
 
-###Build
+### Build
 
 `build -t ebarsallo/hbase:0.98.2-hadoop1 .`
 
-###Run
+### Run
 ```bat
 docker run -d -P -it -h hbase-master -name hbase-master ebarsallo/hbase:0.98.2-hadoop1
 ```
 
-###Useful commands
+### Useful commands
 Check all running/not running dockers process
 ```
 docker ps -a
@@ -25,7 +25,7 @@ Get ports map
 docker port {name}
 ```
 
-###Connect
+### Connect
 ```bat
 ssh root@{ip}
 ```
